@@ -1,0 +1,25 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <title>Secret Santa</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon.png') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='milligram.min.css') }}">
+</head>
+
+<body style="background-color: #f4f5f6">
+<div style="text-align: center; width: 400px;background-color: #fbfbfb;margin: 10% auto auto; padding: 40px;">
+{#  <img src="{{ url_for('static', filename='santa.png') }}"/>#}
+  <h1>Secret Santa</h1>
+  <div>
+    <form method="post">
+      <fieldset>
+        <label for="nameField" style="text-align: left">Login</label>
+        <input type="text" name="login" style="font-size:24px;">
+        <label for="passwordField" style="text-align: left">Password</label>
+        <input type="password" name="password">
+        <input class="button-primary" type="submit" value="Получить имя" style="margin-bottom: 0">
+      </fieldset>
+    </form>
+  </div>
+</div>
+</body>
