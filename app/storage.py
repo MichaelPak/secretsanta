@@ -6,6 +6,7 @@ from app import settings
 USER_KEY = 'user'
 NOT_IN_GAME = 'not_in_game'
 IN_GAME = 'in_game'
+REF_KEY = 'ref'
 PRESENCE = 'presence'
 
 
@@ -18,5 +19,31 @@ def load():
 
     for u in users:
         r.set('{}:{}'.format(USER_KEY, u['name']), u['pass'])
-        r.lpush(NOT_IN_GAME, u['name'])
-        r.lpush(PRESENCE, u['name'])
+        r.sadd(NOT_IN_GAME, u['name'])
+        r.sadd(PRESENCE, u['name'])
+
+
+def check_password(login, password):
+    return password == str(r.get('{}:{}'.format(USER_KEY, login)))
+
+
+def get_user(login):
+    if r.sismember(NOT_IN_GAME, login):
+        r.srem(NOT_IN_GAME, login)
+
+        user = r.srandmember(PRESENCE)
+        r.srem(PRESENCE, user)
+
+        r.set('{}:{}'.format(REF_KEY, login), user)
+        r.sadd(IN_GAME, login)
+        return user
+    elif r.exists('{}:{}'.format(REF_KEY, login)):
+        user = r.get('{}:{}'.format(REF_KEY, login))
+        return user
+    else:
+        raise RuntimeError('Something going wrong...')
+
+
+def in_game_list():
+    users = r.smembers(IN_GAME)
+    return users

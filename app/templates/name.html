@@ -1,0 +1,26 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>Secret Santa</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='milligram.min.css') }}">
+</head>
+
+<body style="background-color: #f4f5f6">
+<div style="text-align: center; width: 400px;margin: 10% auto auto;">
+    <h1>Secret Santa</h1>
+    <div style="background-color: #fbfbfb; padding: 40px;">
+        <div>
+            <h2>Target: <b>{{ user }}</b></h2>
+            <div style="width: 90%;text-align: left;margin: auto;">
+                <label>In game:</label>
+                <ul>
+                    {% for u in users %}
+                        <li>{{ u }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
