@@ -1,7 +1,7 @@
 import redis
 import yaml
 
-import settings
+from app import settings
 
 USER_KEY = 'user'
 NOT_IN_GAME = 'not_in_game'

@@ -9,10 +9,6 @@ def template_test():
         return render_template('login.html')
     else:
         try:
-
+            pass
         except Exception:
             return render_template('login.html')
-
-
-if __name__ == '__main__':
-    app.run(debug=True)

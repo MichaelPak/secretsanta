@@ -1,0 +1,4 @@
+- name: user1
+  pass: password1
+- name: user2
+  pass: password2
