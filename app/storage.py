@@ -30,8 +30,10 @@ def check_password(login, password):
 def get_user(login):
     if r.sismember(NOT_IN_GAME, login):
         r.srem(NOT_IN_GAME, login)
-
-        user = r.srandmember(PRESENCE)
+        while True:
+            user = r.srandmember(PRESENCE)
+            if user != login:
+                break
         r.srem(PRESENCE, user)
 
         r.set('{}:{}'.format(REF_KEY, login), user)
