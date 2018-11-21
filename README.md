@@ -1,6 +1,6 @@
 Secret Santa
 ===
-![alt text](https://raw.githubusercontent.com/MichaelPak/secretsanta/master/static/santa.png)
+![alt text](https://raw.githubusercontent.com/MichaelPak/secretsanta/master/app/static/santa.png)
 
 # Run
 
