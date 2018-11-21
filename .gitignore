@@ -4,5 +4,9 @@
 # App
 resources/users.yml
 
-# python
+# Python
 *.pyc
+
+# Terraform
+iaac/.terraform/
+local.tfvars
