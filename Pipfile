@@ -5,7 +5,7 @@ name = "pypi"
 
 [scripts]
 loaddb = "python manage.py loaddb"
-server = "flask run"
+server = "flask run -h 0.0.0.0 -p 8000"
 
 [packages]
 flask = "*"

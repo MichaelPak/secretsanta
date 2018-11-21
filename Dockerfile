@@ -14,4 +14,4 @@ COPY app/ /usr/src/app/
 COPY conf/run.sh .
 COPY manage.py .
 
-ENTRYPOINT ["run.sh"]
+ENTRYPOINT ["sh", "-c", "/usr/src/run.sh"]
