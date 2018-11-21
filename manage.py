@@ -17,7 +17,7 @@ def cli(ctx, debug):
 @cli.command()
 def loaddb():
     storage.load()
-    click.echo('Database initialized')
+    click.echo(' * Database initialized')
 
 
 if __name__ == '__main__':

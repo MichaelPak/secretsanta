@@ -3,6 +3,10 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 name = "pypi"
 
+[scripts]
+loaddb = "python manage.py loaddb"
+server = "flask run"
+
 [packages]
 flask = "*"
 redis = "*"
