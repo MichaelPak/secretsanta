@@ -53,3 +53,10 @@ jobs:
     - deploy:
         name: Deploy applicaion
         command: ssh -v root@$DROPLET_IP "docker pull michaelpak/secretsanta; docker-compose stop web; docker-compose rm -f web; docker-compose up -d"
+
+workflows:
+  version: 2
+  ci/cd:
+    jobs:
+    - build
+    - deploy
