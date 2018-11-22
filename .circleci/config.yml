@@ -52,11 +52,13 @@ jobs:
         - "ef:22:2e:5f:3b:f4:1d:97:72:3d:03:f7:9c:d6:34:06"
     - deploy:
         name: Deploy applicaion
-        command: ssh -v root@$DROPLET_IP "docker pull michaelpak/secretsanta; docker-compose stop web; docker-compose rm -f web; docker-compose up -d"
+        command: ssh -o StrictHostKeyChecking=no -v root@$DROPLET_IP "docker pull michaelpak/secretsanta; docker-compose stop web; docker-compose rm -f web; docker-compose up -d"
 
 workflows:
   version: 2
   ci/cd:
     jobs:
     - build
-    - deploy
+    - deploy:
+        requires:
+        - build
