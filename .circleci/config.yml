@@ -38,7 +38,7 @@ jobs:
         key: v1-{{ .Branch }}-{{ epoch }}
         paths:
         - /caches/app.tar
-    - push:
+    - run:
         name: Push application Docker image
         command: |
           docker login -u $DOCKER_USER -p $DOCKER_PASS
