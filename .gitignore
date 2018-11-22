@@ -8,5 +8,9 @@ resources/users.yml
 *.pyc
 
 # Terraform
-iaac/.terraform/
+.terraform/
 local.tfvars
+
+# Ansible
+local.yml
+*.retry

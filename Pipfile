@@ -1,20 +1,23 @@
 [[source]]
-url = "https://pypi.org/simple"
+url = 'https://pypi.org/simple'
 verify_ssl = true
-name = "pypi"
+name = 'pypi'
 
 [scripts]
-loaddb = "python manage.py loaddb"
-server = "flask run -h 0.0.0.0 -p 8000"
+loaddb = 'python manage.py loaddb'
+server = 'flask run -h 0.0.0.0 -p 8000'
+tfapply = 'python manage.py tfapply'
+tfdestroy = 'python manage.py tfdestroy'
+ansplay = 'python manage.py ansplay --env ansible_python_interpreter=/usr/bin/python3'
 
 [packages]
-flask = "*"
-redis = "*"
-pyyaml = "*"
-click = "*"
-colorama = "*"
+flask = '*'
+redis = '*'
+pyyaml = '*'
+click = '*'
+colorama = '*'
 
 [dev-packages]
 
 [requires]
-python_version = "2.7"
+python_version = '2.7'

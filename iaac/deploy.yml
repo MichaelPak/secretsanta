@@ -1,0 +1,56 @@
+---
+- hosts: all
+  vars_files:
+  - ../local.yml
+
+  vars:
+  - docker_install_compose: true
+  - docker_install_compose: false
+
+  - caddy_systemd_capabilities_enabled: True
+  - caddy_config: |
+      secretsanta.pak.digital {
+        log /var/log/caddy/access.log
+        errors /var/log/caddy/error.log
+        proxy / 127.0.0.1:8000 {
+          transparent
+        }
+        tls mialpak@gmail.com
+      }
+
+  roles:
+  - geerlingguy.docker
+  - antoiner77.caddy
+
+  tasks:
+  - name: Install pip3
+    apt:
+      name: python3-pip
+
+  - name: Install docker-compose
+    pip:
+      name: docker-compose
+
+  - name: Copy users list
+    copy:
+      src: ../resources/users.yml
+      dest: /root/users.yml
+
+  - name: Start services
+    docker_service:
+      project_name: secret-santa
+      definition:
+        version: '3'
+        services:
+          db:
+            image: redis
+          web:
+            image: michaelpak/secretsanta
+            volumes:
+            - /root/users.yml:/usr/src/resources/users.yml
+            ports:
+            - "8000:8000"
+            depends_on:
+            - db
+            environment:
+            - REDIS_HOST=db

@@ -10,8 +10,8 @@ COPY Pipfile .
 COPY Pipfile.lock .
 RUN set -ex && pipenv install --deploy
 
-COPY app/ /usr/src/app/
-COPY conf/run.sh .
+COPY app /usr/src/app/
+COPY build/run.sh .
 COPY manage.py .
 
 ENTRYPOINT ["sh", "-c", "/usr/src/run.sh"]
