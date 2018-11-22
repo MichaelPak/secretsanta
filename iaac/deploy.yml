@@ -16,6 +16,11 @@
         tls mialpak@gmail.com
       }
 
+  pre_tasks:
+  - name: Update apt cache
+    apt:
+      update_cache: yes
+
   roles:
   - geerlingguy.docker
   - antoiner77.caddy
@@ -34,21 +39,12 @@
       src: ../resources/users.yml
       dest: /root/users.yml
 
-  - name: Start services
+  - name: Copy docker compose config
+    copy:
+      src: ../docker-compose.yml
+      dest: /root/docker-compose.yml
+
+  - name: Start Prometheus service
     docker_service:
-      project_name: secret-santa
-      definition:
-        version: '3'
-        services:
-          db:
-            image: redis
-          web:
-            image: michaelpak/secretsanta
-            volumes:
-            - /root/users.yml:/usr/src/resources/users.yml
-            ports:
-            - "8000:8000"
-            depends_on:
-            - db
-            environment:
-            - REDIS_HOST=db
+      project_src: /root
+      state: present
