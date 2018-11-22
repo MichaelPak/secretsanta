@@ -6,6 +6,7 @@ name = 'pypi'
 [scripts]
 loaddb = 'python manage.py loaddb'
 server = 'flask run -h 0.0.0.0 -p 8000'
+tfinit = 'python manage.py tfinit'
 tfapply = 'python manage.py tfapply'
 tfdestroy = 'python manage.py tfdestroy'
 ansplay = 'python manage.py ansplay --env ansible_python_interpreter=/usr/bin/python3'

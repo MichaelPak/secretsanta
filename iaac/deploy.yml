@@ -1,7 +1,5 @@
 ---
 - hosts: all
-  vars_files:
-  - ../local.yml
 
   vars:
   - docker_install_compose: true

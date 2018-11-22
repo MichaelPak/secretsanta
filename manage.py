@@ -23,6 +23,11 @@ def loaddb():
 
 
 @cli.command()
+def tfinit():
+    call(["terraform", "init", "iaac/"])
+
+
+@cli.command()
 def tfapply():
     call(["terraform", "apply", "-var-file=local.tfvars", "iaac/"])
 

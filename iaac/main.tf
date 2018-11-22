@@ -1,14 +1,15 @@
 resource "digitalocean_ssh_key" "public" {
-  name       = "SecreSanta"
+  name = "SecreSanta"
   public_key = "${file(var.public_key)}"
 }
 
 resource "digitalocean_droplet" "web" {
-  image  = "ubuntu-18-04-x64"
-  name   = "secretsanta"
+  image = "ubuntu-18-04-x64"
+  name = "secretsanta"
   region = "${var.region}"
-  size   = "s-1vcpu-1gb"
-  ssh_keys = ["${digitalocean_ssh_key.public.fingerprint}"]
+  size = "s-1vcpu-1gb"
+  ssh_keys = [
+    "${digitalocean_ssh_key.public.fingerprint}"]
 
   provisioner "remote-exec" {
     connection {
@@ -16,42 +17,57 @@ resource "digitalocean_droplet" "web" {
       user = "root"
       private_key = "${file(var.private_key)}"
     }
-    inline = ["echo 'sshd is up'"]
+    inline = [
+      "echo 'sshd is up'"]
   }
 }
 
 resource "digitalocean_record" "www" {
   domain = "pak.digital"
-  type   = "A"
-  name   = "secretsanta"
-  value  = "${digitalocean_droplet.web.ipv4_address}"
+  type = "A"
+  name = "secretsanta"
+  value = "${digitalocean_droplet.web.ipv4_address}"
 }
 
 resource "digitalocean_firewall" "web" {
   name = "only-22-80-and-443"
 
-  droplet_ids = ["${digitalocean_droplet.web.id}"]
+  droplet_ids = [
+    "${digitalocean_droplet.web.id}"]
 
   inbound_rule = [
     {
-      protocol           = "tcp"
-      port_range         = "22"
-      source_addresses   = ["0.0.0.0/24"]
+      protocol = "tcp"
+      port_range = "22"
+      source_addresses = [
+        "0.0.0.0/0"]
     },
     {
-      protocol           = "tcp"
-      port_range         = "80"
-      source_addresses   = ["0.0.0.0/0", "::/0"]
+      protocol = "tcp"
+      port_range = "80"
+      source_addresses = [
+        "0.0.0.0/0"]
     },
     {
-      protocol           = "tcp"
-      port_range         = "443"
-      source_addresses   = ["0.0.0.0/0", "::/0"]
+      protocol = "tcp"
+      port_range = "443"
+      source_addresses = [
+        "0.0.0.0/0"]
     },
     {
-      protocol           = "icmp"
-      source_addresses   = ["0.0.0.0/0", "::/0"]
-    },
+      protocol = "icmp"
+      source_addresses = [
+        "0.0.0.0/0"]
+    }
+  ]
+
+  outbound_rule = [
+    {
+      protocol = "tcp"
+      port_range = "1-65535"
+      destination_addresses = [
+        "0.0.0.0/0"]
+    }
   ]
 }
 
