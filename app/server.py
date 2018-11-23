@@ -14,7 +14,7 @@ def template_test():
         return render_template('login.html')
     else:
 
-        login = request.form.get('login')
+        login = request.form.get('login').lower()
         password = request.form.get('password')
         if storage.check_password(login, password):
             user = storage.get_user(login)
