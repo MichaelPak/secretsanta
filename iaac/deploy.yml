@@ -44,7 +44,7 @@
       src: ../docker-compose.yml
       dest: /root/docker-compose.yml
 
-  - name: Start Prometheus service
+  - name: Start applications
     docker_service:
       project_src: /root
       state: present
