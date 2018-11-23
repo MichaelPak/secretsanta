@@ -8,6 +8,7 @@ resources/users.yml
 *.pyc
 
 # Terraform
+terraform.*
 .terraform/
 local.tfvars
 
