@@ -2,7 +2,7 @@
 
 Secret Santa
 ===
-[![CircleCI](https://circleci.com/gh/MichaelPak/csgo-server-python.svg?style=svg)](https://circleci.com/gh/MichaelPak/csgo-server-python)
+[![CircleCI](https://circleci.com/gh/MichaelPak/secretsanta/tree/master.svg?style=svg)](https://circleci.com/gh/MichaelPak/secretsanta/tree/master)
 [![dockerhub](https://img.shields.io/badge/docker-hub-green.svg)](https://hub.docker.com/r/michaelpak/secretsanta/)
 
 ## Setup
